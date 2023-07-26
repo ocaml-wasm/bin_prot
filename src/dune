@@ -3,4 +3,4 @@
  (public_name bin_prot)
  (foreign_stubs (language c) (names blit_stubs))
  (preprocess (pps ppx_sexp_conv ppx_compare ppx_optcomp))
- (js_of_ocaml (javascript_files runtime.js)))
+ (js_of_ocaml (javascript_files runtime.js) (wasm_files runtime.wat)))
