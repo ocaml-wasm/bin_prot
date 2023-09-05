@@ -2,7 +2,7 @@
  (libraries core bin_prot expect_test_patterns float_array base.md5)
  (preprocess (pps ppx_jane)))
 
-(alias (name runtest)
+(rule (alias runtest)
  (deps blob_stability_tests.ml integers_repr_tests_32bit.ml
   integers_repr_tests_64bit.ml integers_repr_tests_js.ml)
  (action
