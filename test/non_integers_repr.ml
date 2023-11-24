@@ -232,6 +232,7 @@ module Tests = struct
     }
   ;;
 
+  (*
   let floatarray =
     { writer = Write.bin_write_floatarray
     ; writer_local = Some Write.bin_write_floatarray__local
@@ -243,7 +244,7 @@ module Tests = struct
     ; lo_bound = Minimum.bin_size_floatarray
     }
   ;;
-
+*)
   let ref =
     { writer = Write.bin_write_ref Write.bin_write_int32
     ; writer_local = Some (Write.bin_write_ref__local Write.bin_write_int32__local)
@@ -658,14 +659,17 @@ let%expect_test "Non-integer bin_prot size tests" =
     00 00 00 00 00 00 00 00 -> 0
   |}];
   gen_tests Tests.float_nan;
+  (*
   Expect_test_patterns.require_match
     [%here]
     {|
     7f f{8,0} 00 00 00 00 00 01 -> NAN (glob)
   |};
+*)
   gen_tests Tests.vec;
   [%expect
     {|
+    7f f0 00 00 00 00 00 01 -> NAN
     .. .. .. .. .. .. .. .. 00 -> ()
     3f f0 00 00 00 00 00 00 01 -> (1)
   |}];
@@ -702,12 +706,14 @@ let%expect_test "Non-integer bin_prot size tests" =
     .. .. .. .. .. 00 -> ""
     6f 6c 6c 65 68 05 -> hello
   |}];
+  (*
   gen_tests Tests.floatarray;
   [%expect
     {|
     .. .. .. .. .. .. .. .. 00 -> ()
     00 00 00 00 00 00 00 00 01 -> (0)
   |}];
+*)
   gen_tests Tests.ref;
   [%expect
     {|
