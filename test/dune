@@ -1,5 +1,7 @@
 (library (name bin_prot_test)
- (libraries core bin_prot expect_test_patterns float_array base.md5)
+ (libraries core bin_prot expect_test_helpers_core.expect_test_helpers_base ; expect_test_patterns ;float_array
+  base.md5)
+ (inline_tests (flags -drop-tag no-js -drop-tag no-wasm -drop-tag 64-bits-only) (modes js))
  (preprocess (pps ppx_jane)))
 
 (rule (alias runtest)
@@ -10,5 +12,5 @@
     "diff <(echo 'af86337ee248f8b73fba0ed5b8e22ee7  blob_stability_tests.ml'\
    \necho '4547b57b1c8f0abf952ed17412c0b3bc  integers_repr_tests_32bit.ml'\
    \necho '5af59528b1c10ea70448670561c07471  integers_repr_tests_64bit.ml'\
-   \necho '326e5b52a00bf62d9d08050a525e7fa1  integers_repr_tests_js.ml'\
+   \necho 'db436c9298a5fdf9bc74a659b8780148  integers_repr_tests_js.ml'\
    \n) <(md5sum %{deps})")))
