@@ -1,7 +1,7 @@
 (library (name bin_prot_test)
  (libraries core bin_prot expect_test_helpers_core.expect_test_helpers_base ; expect_test_patterns ;float_array
   base.md5)
- (inline_tests (flags -drop-tag no-js -drop-tag no-wasm -drop-tag 64-bits-only) (modes js))
+ (inline_tests (flags -drop-tag no-js -drop-tag no-wasm -drop-tag 64-bits-only) (modes js wasm))
  (preprocess (pps ppx_jane)))
 
 (rule (alias runtest)
