@@ -14,8 +14,8 @@ function bin_prot_blit_buf_float_array_stub(src_pos, src, dst_pos, dst, len){
   caml_check_bound(dst,dst_pos+len-1); // last pos
   caml_check_bound_bigstring(src, src_pos);  /* first pos */
   caml_check_bound_bigstring(src, src_pos + len * 8 - 1); /* last pos */
-  var view = new joo_global_object.Float64Array(len);
-  var buffer = new joo_global_object.Uint8Array(view.buffer);
+  var view = new globalThis.Float64Array(len);
+  var buffer = new globalThis.Uint8Array(view.buffer);
   buffer.set(src.data.subarray(src_pos, src_pos + (len * 8)));
   for(var i = 0; i < len; i++){
     // [+ 1] because the tag is at pos 0 
@@ -38,8 +38,8 @@ function bin_prot_blit_float_array_buf_stub(src_pos,src, dst_pos, dst, len){
   caml_check_bound_bigstring(dst, dst_pos + len * 8 - 1); /* last pos */
   // [+ 1] because the tag is at pos 0
   src_pos = src_pos + 1
-  var float64 = new joo_global_object.Float64Array(src.slice(src_pos,src_pos + len));
-  var float64_uint8 = new joo_global_object.Uint8Array(float64.buffer);
+  var float64 = new globalThis.Float64Array(src.slice(src_pos,src_pos + len));
+  var float64_uint8 = new globalThis.Uint8Array(float64.buffer);
   var view = dst.data.subarray(dst_pos, dst_pos + (len * 8));
   view.set(float64_uint8);
   return 0
