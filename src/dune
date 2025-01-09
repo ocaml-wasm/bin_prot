@@ -7,5 +7,8 @@
  (public_name bin_prot)
  (preprocess
   (pps ppx_sexp_conv ppx_compare ppx_optcomp))
+ (wasm_of_ocaml
+  (wasm_files runtime.wat)
+  (javascript_files runtime.js))
  (js_of_ocaml
   (javascript_files runtime.js)))

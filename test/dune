@@ -1,8 +1,9 @@
 (library
  (name bin_prot_test)
  (libraries base base_bigstring bin_prot
-   expect_test_helpers_core.expect_test_helpers_base expect_test_patterns
-   float_array base.md5 sexplib splittable_random stdio)
+   expect_test_helpers_core.expect_test_helpers_base
+   base.md5 sexplib splittable_random stdio)
+ (inline_tests (flags -drop-tag no-js -drop-tag 64-bits-only -drop-tag 32-bits-only -drop-tag no-wasm) (modes js wasm))
  (preprocess
   (pps ppx_jane)))
 
