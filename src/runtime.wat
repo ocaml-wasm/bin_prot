@@ -25,6 +25,10 @@
       (func $caml_bigstring_blit_string_to_ba
          (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq))
          (param (ref eq)) (result (ref eq))))
+   (import "env" "caml_bigstring_blit_bytes_to_ba"
+      (func $caml_bigstring_blit_bytes_to_ba
+         (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq))
+         (param (ref eq)) (result (ref eq))))
    (import "env" "caml_bigstring_blit_ba_to_bytes"
       (func $caml_bigstring_blit_ba_to_bytes
          (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq))
@@ -127,7 +131,15 @@
                (ref.i31 (i32.mul (local.get $len) (i32.const 8))))))
       (ref.i31 (i32.const 0)))
 
-   (export "bin_prot_blit_bytes_buf_stub" (func $bin_prot_blit_string_buf_stub))
+   (func (export "bin_prot_blit_bytes_buf_stub")
+      (param $src_pos (ref eq)) (param $src (ref eq))
+      (param $dst_pos (ref eq)) (param $dst (ref eq))
+      (param $len (ref eq)) (result (ref eq))
+      (return_call $caml_bigstring_blit_bytes_to_ba
+         (local.get $src) (local.get $src_pos)
+         (local.get $dst) (local.get $dst_pos)
+         (local.get $len)))
+
    (func $bin_prot_blit_string_buf_stub (export "bin_prot_blit_string_buf_stub")
       (param $src_pos (ref eq)) (param $src (ref eq))
       (param $dst_pos (ref eq)) (param $dst (ref eq))
